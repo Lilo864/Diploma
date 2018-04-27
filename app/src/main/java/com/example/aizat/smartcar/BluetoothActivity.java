@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
@@ -33,8 +35,11 @@ public class BluetoothActivity extends AppCompatActivity {
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     ListView lv;
     static OutputStream outputStream = null;
+    static InputStream inputStream = null;
     ToggleButton btState;
     Button showDevLs;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,7 @@ public class BluetoothActivity extends AppCompatActivity {
         btState.setChecked(btAdapter.isEnabled());
         showDevLs = (Button) findViewById(R.id.showDevLs);
         showDevLs.setEnabled(btState.isChecked());
+
     }
 
     public void changeBTState(View v){
@@ -155,5 +161,38 @@ public class BluetoothActivity extends AppCompatActivity {
     private void msg(String s)
     {
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+    }
+
+    private String bytesToString(byte[] bytes){
+        String s = "";
+        for(byte b : bytes){
+            s += (char)b;
+        }
+        return s;
+    }
+
+    private class ReceiveThread extends Thread{
+
+        public void run(){
+            byte[] buffer = new byte[1024];
+            int bytes;
+
+            while(true){
+                try {
+                    bytes = inputStream.available();
+                    if(bytes != 0){
+                        SystemClock.sleep(100);
+
+                        bytes = inputStream.available();
+                        bytes = inputStream.read(buffer,0,bytes);
+
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    break;
+                }
+            }
+        }
+
     }
 }

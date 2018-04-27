@@ -12,54 +12,88 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-/**
- * Created by aizat on 4/20/18.
- */
+import java.io.IOException;
+
 
 public class LightFragment extends Fragment {
-    private static final String TAG = "Conditioner Fragment";
-    private ToggleButton condStateBtn;
-    private SeekBar condSeekBar;
-    private TextView condSeekValue;
+    private static final String TAG = "Light Fragment";
+    private ToggleButton livToogle, bedToogle, garageToogle;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.conditioner_fragment,container,false);
-        condStateBtn = (ToggleButton) view.findViewById(R.id.condStateToggle);
-        condSeekBar = (SeekBar) view.findViewById(R.id.condSeekBar);
-        condSeekValue = (TextView) view.findViewById(R.id.condSeekValue);
-//        condSeekValue.setText(condSeekBar.getProgress());
-        condStateBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        View view = inflater.inflate(R.layout.light_fragment,container,false);
+
+        livToogle = (ToggleButton) view.findViewById(R.id.livToggle);
+        bedToogle = (ToggleButton) view.findViewById(R.id.bedToggle);
+        garageToogle = (ToggleButton) view.findViewById(R.id.garageToggle);
+
+
+        livToogle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    showToast("Conditioner is on.");
-                }else{
-                    showToast("Conditioner is off.");
+                if (b){
+                    Toast.makeText(getActivity(),"Button is ON!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("L".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getActivity(),"Button is OFF!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("l".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
-        condSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
+        bedToogle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                condSeekValue.setText(String.valueOf(i));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    Toast.makeText(getActivity(),"Button is ON!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("B".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getActivity(),"Button is OFF!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("b".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
+
+        garageToogle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    Toast.makeText(getActivity(),"Button is ON!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("G".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getActivity(),"Button is OFF!",Toast.LENGTH_SHORT).show();
+                    try {
+                        BluetoothActivity.outputStream.write("g".getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+
         return view;
     }
 
-    private void showToast(String msg){
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-    }
 }

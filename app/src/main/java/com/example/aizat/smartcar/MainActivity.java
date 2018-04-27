@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
     public static final String TAG = "MainActivity";
     private SectionsPageAdapter sectionsPageAdapter;
 
+    private TabLayout tabLayout;
+
     private ViewPager viewPager;
 
     private static final int REQUEST_RECOGNITION = 1;
@@ -52,14 +54,15 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
         startRecognizer = (FloatingActionButton) findViewById(R.id.fab);
 //        startRecognizer.setEnabled(false);
         tts = new TextToSpeech(this, this);
+
     }
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new LightFragment(),"Conditioner");
-        adapter.addFragment(new InnerLightFragment(),"Inner Lights");
-        adapter.addFragment(new LightsFragment(),"Lights");
-        adapter.addFragment(new OpenFragment(),"Open");
+        adapter.addFragment(new LightFragment(),"Lights");
+        adapter.addFragment(new FanFragment(),"Fans");
+        adapter.addFragment(new DoorFragment(),"Doors");
+        adapter.addFragment(new TempFragment(),"Temp");
         viewPager.setAdapter(adapter);
     }
 

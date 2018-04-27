@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">SmartCar</string>
-    <string name="tab_text_1">Conditioner</string>
-    <string name="tab_text_2">Inner Light</string>
-    <string name="tab_text_3">Lights</string>
-    <string name="tab_text_4">Open</string>
+    <string name="app_name">SmartHome</string>
+    <string name="tab_text_1">Lights</string>
+    <string name="tab_text_2">Fans</string>
+    <string name="tab_text_3">Doors</string>
+    <string name="tab_text_4">Temp</string>
     <string name="temperature">Temperature</string>
     <string name="show_dev_ls">Show device list</string>
     <string name="bt_settings">Bluetooth Settings</string>

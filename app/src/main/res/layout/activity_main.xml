@@ -7,8 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.aizat.smartcar.MainActivity"
-    android:background="@mipmap/bg">
+    tools:context="com.example.aizat.smartcar.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -45,11 +44,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/mic"
+        android:layout_width="57dp"
+        android:layout_height="58dp"
+        android:layout_gravity="bottom|center|end"
+        android:src="@drawable/mic1"
         android:onClick="speechButton"
+        android:layout_marginRight="152dp"
+        app:layout_constraintRight_toRightOf="parent"
+
         android:layout_margin="16dp" />
 
 </android.support.design.widget.CoordinatorLayout>
