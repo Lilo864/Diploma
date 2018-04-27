@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SmartCar</string>
+    <string name="tab_text_1">Conditioner</string>
+    <string name="tab_text_2">Inner Light</string>
+    <string name="tab_text_3">Lights</string>
+    <string name="tab_text_4">Open</string>
+    <string name="temperature">Temperature</string>
+    <string name="show_dev_ls">Show device list</string>
+    <string name="bt_settings">Bluetooth Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
+</resources>

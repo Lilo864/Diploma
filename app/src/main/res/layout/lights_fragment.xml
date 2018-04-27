@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="@dimen/desc_item"
+                android:layout_height="match_parent"
+                android:text="Headlamps"/>
+            <ToggleButton
+                android:id="@+id/HeadLampStateToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Headlamps" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="@dimen/desc_item"
+                android:layout_height="match_parent"
+                android:text="Fog lamps"/>
+            <ToggleButton
+                android:id="@+id/FogLampsStateToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fog lamps" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="@dimen/desc_item"
+                android:layout_height="match_parent"
+                android:text="Right lamp"/>
+            <ToggleButton
+                android:id="@+id/RightLampStateToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right lamp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="@dimen/desc_item"
+                android:layout_height="match_parent"
+                android:text="Left lamp"/>
+            <ToggleButton
+                android:id="@+id/LeftLampStateToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left Lamp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="@dimen/desc_item"
+                android:layout_height="match_parent"
+                android:text="Stop lamp"/>
+            <ToggleButton
+                android:id="@+id/StopLampStateToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop Lamp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
