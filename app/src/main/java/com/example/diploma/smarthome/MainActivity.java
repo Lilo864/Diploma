@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import android.content.Intent;
 import android.speech.RecognizerIntent;
@@ -100,41 +100,41 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            analyzeSpeech(adapter);
+//            analyzeSpeech(adapter);
         }
 
     }
-    public void analyzeSpeech(ArrayAdapter<?> adapter){
-        int count = adapter.getCount();
-        ToggleButton tb;
-        boolean flag =false;
-        try {
-            for (int i = 0; i < count; i++) {
-                String sr = adapter.getItem(i).toString();
-                if (sr.equals("зелёный") || sr.equals("зеленый")) {
-                    msg("Green");
-                    flag = true;
-                    break;
-                }
-                if (sr.equals("желтый") || sr.equals("жёлтый")) {
-
-                    msg("yellow");
-                    flag = true;
-                    break;
-                }
-                if (sr.equals("красный")) {
-                    msg("red");
-                    flag = true;
-                    break;
-                }
-            }
-            if(!flag) {
-                msg("Не распознано");
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-    }
+//    public void analyzeSpeech(ArrayAdapter<?> adapter){
+//        int count = adapter.getCount();
+//        ToggleButton tb;
+//        boolean flag =false;
+//        try {
+//            for (int i = 0; i < count; i++) {
+//                String sr = adapter.getItem(i).toString();
+//                if (sr.equals("зелёный") || sr.equals("зеленый")) {
+//                    msg("Green");
+//                    flag = true;
+//                    break;
+//                }
+//                if (sr.equals("желтый") || sr.equals("жёлтый")) {
+//
+//                    msg("yellow");
+//                    flag = true;
+//                    break;
+//                }
+//                if (sr.equals("красный")) {
+//                    msg("red");
+//                    flag = true;
+//                    break;
+//                }
+//            }
+//            if(!flag) {
+//                msg("Не распознано");
+//            }
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//    }
     public void speechButton(View v){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,

@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import org.junit.Test;
 

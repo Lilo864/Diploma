@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,23 +23,21 @@ public class DoorFragment extends Fragment {
         View view = inflater.inflate(R.layout.door_fragment,container,false);
 
         doorToggle = (ToggleButton) view.findViewById(R.id.doorToggle);
+//        D - ON d - OFF
         doorToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    Toast.makeText(getActivity(),"Button is ON!",Toast.LENGTH_SHORT).show();
-                    try {
+                try {
+                    if (b) {
+                        Toast.makeText(getActivity(),"Button is ON!",Toast.LENGTH_SHORT).show();
                         BluetoothActivity.outputStream.write("D".getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    Toast.makeText(getActivity(),"Button is OFF!",Toast.LENGTH_SHORT).show();
-                    try {
+
+                    } else {
+                        Toast.makeText(getActivity(),"Button is OFF!",Toast.LENGTH_SHORT).show();
                         BluetoothActivity.outputStream.write("d".getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
+                }catch (Exception ex){
+                    ex.printStackTrace();
                 }
             }
         });

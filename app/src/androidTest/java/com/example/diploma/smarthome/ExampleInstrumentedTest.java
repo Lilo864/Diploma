@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

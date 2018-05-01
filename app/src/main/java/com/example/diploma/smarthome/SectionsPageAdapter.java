@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

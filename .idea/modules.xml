@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Homer Simpson\Desktop\SmartHomeAizada\SmartHome\SmartCar2.iml" filepath="C:\Users\Homer Simpson\Desktop\SmartHomeAizada\SmartHome\SmartCar2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SmartHome.iml" filepath="$PROJECT_DIR$/SmartHome.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Homer Simpson\Desktop\SmartHomeAizada\SmartHome\app\app.iml" filepath="C:\Users\Homer Simpson\Desktop\SmartHomeAizada\SmartHome\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/diploma.iml" filepath="$PROJECT_DIR$/diploma.iml" />
     </modules>
   </component>
 </project>

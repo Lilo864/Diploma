@@ -1,4 +1,4 @@
-package com.example.aizat.smartcar;
+package com.example.diploma.smarthome;
 
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -39,6 +39,7 @@ public class BluetoothActivity extends AppCompatActivity {
     ToggleButton btState;
     Button showDevLs;
 
+    private TextView temperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class BluetoothActivity extends AppCompatActivity {
         showDevLs = (Button) findViewById(R.id.showDevLs);
         showDevLs.setEnabled(btState.isChecked());
 
+        temperature = findViewById(R.id.currentTemperature);
     }
 
     public void changeBTState(View v){
@@ -186,6 +188,7 @@ public class BluetoothActivity extends AppCompatActivity {
                         bytes = inputStream.available();
                         bytes = inputStream.read(buffer,0,bytes);
 
+                        temperature.setText(bytesToString(buffer));
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
