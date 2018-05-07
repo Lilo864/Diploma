@@ -22,6 +22,7 @@ public class FanFragment extends Fragment {
         View view = inflater.inflate(R.layout.fan_fragment,container,false);
 
         fanToggle = (ToggleButton) view.findViewById(R.id.fanToggle);
+
 //        F - ON f - OFF
         fanToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

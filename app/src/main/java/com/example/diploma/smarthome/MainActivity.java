@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
     private FloatingActionButton startRecognizer;
     private TextToSpeech tts;
 
+    private ListenerClass listenerClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
 //        startRecognizer.setEnabled(false);
         tts = new TextToSpeech(this, this);
 
+        listenerClass = new ListenerClass();
+
+        ListenerClass.buttonMap.put(Buttons.GARAGE,R.id.garageToggle);
     }
 
     private void setupViewPager(ViewPager viewPager){
@@ -100,41 +105,47 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            analyzeSpeech(adapter);
+            analyzeSpeech(adapter);
         }
 
     }
-//    public void analyzeSpeech(ArrayAdapter<?> adapter){
-//        int count = adapter.getCount();
-//        ToggleButton tb;
-//        boolean flag =false;
-//        try {
-//            for (int i = 0; i < count; i++) {
-//                String sr = adapter.getItem(i).toString();
-//                if (sr.equals("зелёный") || sr.equals("зеленый")) {
-//                    msg("Green");
-//                    flag = true;
-//                    break;
-//                }
-//                if (sr.equals("желтый") || sr.equals("жёлтый")) {
-//
-//                    msg("yellow");
-//                    flag = true;
-//                    break;
-//                }
-//                if (sr.equals("красный")) {
-//                    msg("red");
-//                    flag = true;
-//                    break;
-//                }
-//            }
-//            if(!flag) {
-//                msg("Не распознано");
-//            }
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-//    }
+
+    public void analyzeSpeech(ArrayAdapter<?> adapter){
+        int count = adapter.getCount();
+        try {
+            Activities activity = null;
+            Buttons key = null;
+            String keyString = null, activityString = null;
+            boolean activityFound = false, keyFound = false;
+            for (int i = 0; i < count; i++) {
+                String sr[] = adapter.getItem(i).toString().split(" ");
+                for(int k = 0;k < sr.length;k++){
+                    String word = sr[k];
+                    if (listenerClass.getKeyMap().containsKey(word)) {
+                        key = listenerClass.getKeyMap().get(word);
+                        keyString = word;
+                        keyFound = true;
+                    }
+                    if (listenerClass.getActivityMap().containsKey(word)) {
+                        activity = listenerClass.getActivityMap().get(word);
+                        activityString = word;
+                        activityFound = true;
+                    }
+                }
+            }
+            if(!keyFound || !activityFound) {
+                msg("Не распознано");
+                return;
+            }
+            msg("Выполняется: " + activityString + " " + keyString);
+            boolean state = listenerClass.listener(activity, key);
+
+            ToggleButton tb = (ToggleButton) findViewById(ListenerClass.buttonMap.get(key));
+            tb.setChecked(state);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
     public void speechButton(View v){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,

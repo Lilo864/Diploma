@@ -30,7 +30,9 @@
                 android:id="@+id/doorToggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Дверь 1" />
+                android:text="Дверь 1"
+                android:textOff="open"
+                android:textOn="close" />
         </LinearLayout>
 
     </LinearLayout>
