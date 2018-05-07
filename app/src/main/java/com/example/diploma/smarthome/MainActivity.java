@@ -18,6 +18,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnInitListener {
@@ -58,8 +60,6 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
         tts = new TextToSpeech(this, this);
 
         listenerClass = new ListenerClass();
-
-        ListenerClass.buttonMap.put(Buttons.GARAGE,R.id.garageToggle);
     }
 
     private void setupViewPager(ViewPager viewPager){
@@ -140,8 +140,11 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
             msg("Выполняется: " + activityString + " " + keyString);
             boolean state = listenerClass.listener(activity, key);
 
-            ToggleButton tb = (ToggleButton) findViewById(ListenerClass.buttonMap.get(key));
-            tb.setChecked(state);
+            ToggleButton tb = (ToggleButton) findViewById(listenerClass.getButtonMap().get(key));
+            if(activity == Activities.CLOSE || activity == Activities.TURN_OFF)
+                tb.setChecked(false);
+            if(activity == Activities.OPEN || activity == Activities.TURN_ON)
+                tb.setChecked(true);
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -155,5 +158,75 @@ public class MainActivity extends AppCompatActivity  implements TextToSpeech.OnI
     }
     private void msg(String s) {
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+    }
+
+
+    public class ListenerClass {
+
+        private Map<Buttons,String> onMap;
+        private Map<String,Activities> activityMap;
+        private Map<String,Buttons> keyMap;
+        private Map<Buttons,Integer> buttonMap = new HashMap<>();
+        public ListenerClass(){
+            onMap = new HashMap<>();
+            activityMap = new HashMap<>();
+            keyMap = new HashMap<>();
+            initMaps();
+            initButtonMap();
+        }
+        private void initMaps(){
+            keyMap.put("кондиционер",Buttons.FAN);
+            keyMap.put("дверь",Buttons.DOOR);
+            keyMap.put("свет‚",Buttons.LIGHT);
+            keyMap.put("спальная",Buttons.BED);
+            keyMap.put("гараж",Buttons.GARAGE);
+
+            activityMap.put("включить",Activities.TURN_ON);
+            activityMap.put("выключить", Activities.TURN_OFF);
+            activityMap.put("открыть", Activities.OPEN);
+            activityMap.put("закрыть", Activities.CLOSE);
+
+            onMap.put(Buttons.FAN,"F");
+            onMap.put(Buttons.DOOR,"D");
+            onMap.put(Buttons.LIGHT,"L");
+            onMap.put(Buttons.BED,"B");
+            onMap.put(Buttons.GARAGE, "G");
+        }
+        private void initButtonMap(){
+            buttonMap.put(Buttons.FAN,R.id.fanToggle);
+            buttonMap.put(Buttons.LIGHT,R.id.livToggle);
+            buttonMap.put(Buttons.DOOR,R.id.doorToggle);
+            buttonMap.put(Buttons.BED,R.id.bedToggle);
+            buttonMap.put(Buttons.GARAGE,R.id.garageToggle);
+        }
+        public boolean listener(Activities activity,Buttons key) throws Exception{
+            String sendCode = onMap.get(key);
+            if (activity== Activities.OPEN || activity==Activities.TURN_ON) {
+                BluetoothActivity.outputStream.write(sendCode.toUpperCase().getBytes());
+                return true;
+            }else
+            {
+                BluetoothActivity.outputStream.write(sendCode.toLowerCase().getBytes());
+                return false;
+            }
+        }
+
+        public Map<String, Activities> getActivityMap() {
+            return activityMap;
+        }
+
+        public Map<String, Buttons> getKeyMap() {
+            return keyMap;
+        }
+
+        public Map<Buttons, Integer> getButtonMap() {
+            return buttonMap;
+        }
+    }
+    enum Buttons{
+        FAN,LIGHT,DOOR,BED,GARAGE;
+    }
+    enum Activities{
+        TURN_ON, TURN_OFF, OPEN,CLOSE;
     }
 }
